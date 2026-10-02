@@ -1,0 +1,35 @@
+{
+  "name": "wagner-kablo-personel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Wagner Kablo personel yönetim sistemi - frontend ve backend monorepo",
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.19.0",
+    "npm": ">=10.0.0"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently --names \"backend,frontend\" --prefix-colors \"blue,green\" \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "dev:backend": "npm run dev --workspace backend",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run typecheck --workspaces --if-present && npm run build --workspaces --if-present",
+    "start:backend": "npm run start --workspace backend",
+    "preview:frontend": "npm run preview --workspace frontend",
+    "clean": "npm run clean --workspaces --if-present",
+    "backend:status": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/backend-lifecycle.ps1 status",
+    "backend:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/backend-lifecycle.ps1 stop",
+    "backend:start": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/backend-lifecycle.ps1 start",
+    "backend:restart": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/backend-lifecycle.ps1 restart",
+    "backend:clean-orphans": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/backend-lifecycle.ps1 clean-orphans",
+    "backend:selftest": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/backend-lifecycle.ps1 selftest"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
